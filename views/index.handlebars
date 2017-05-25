@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12 center-align">
+      <h1 class="center-align text-warning">order burger app</h1>
+      <form method="POST" action="/" class="button-size text-center">
+        <textarea type="text" name="burger_name" data-error="wrong" data-success="right" required></textarea>
+        <br>
+       <button type="submit" class="btn btn-primary">Order </button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m6 burger-col">
+      <ul class="collection with-header">
+        <li class="collection-header center-align">
+          <h5>uneaten burgers</h5></li>
+        {{#each burgers}} {{#unless this.consumed}}
+        <li class="collection-item avatar">
+          <span class="title">
+            {{this.id}}.{{this.burger_name}}
+            </span>
+          <br>
+          <form action="/{{this.id}}?_method=PUT" method="POST">
+            <input type="hidden" name="id" value="{{this.consumed}}">
+            <button class="" type="submit">EAT</button>
+          </form>
+        </li>
+        {{/unless}} {{/each}}
+      </ul>
+    </div>
+    <div class="col s12 m6 burger-col">
+      <ul class="collection with-header">
+        <li class="collection-header center-align">
+          <h5>consumed Burgers</h5></li>
+        {{#each burgers}} {{#if this.consumed}}
+        <li class="collection-item avatar">
+          <span class="title grey-text text-darken-1">
+          {{this.id}}. {{this.burger_name}}
+          </span> 
+          {{/if}} {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
